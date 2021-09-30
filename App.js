@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import Formulario from './components/Formulario';
 import Pais from './components/Pais';
 
 export default function App() {
   const [busqueda, guardarbusqueda] = useState({
-    pais:''
+    pais: ''
   });
 
   const [consultar, guardarconsultar] = useState(false);
@@ -14,41 +14,56 @@ export default function App() {
 
   useEffect(() => {
 
-    const {pais} = busqueda;
+    const { pais } = busqueda;
     const consultarPais = async () => {
-      if(consultar){
+      if (consultar) {
         const url = `http://api.countrylayer.com/v2/alpha/${pais}?access_key=572b5176e27d29232a76dadd7a242736`;
-        try{
-          const respuesta = await fetch (url);
+        try {
+          const respuesta = await fetch(url);
           const resultado = await respuesta.json();
 
           guardarresultado(resultado);
           guardarconsultar(false);
 
-        }catch(error){
+        } catch (error) {
           mostrarAlerta();
         }
 
       }
     };
+
     consultarPais();
+
+
+
+
+
   }, [consultar]);
 
-  const mostrarAlerta=()=>{
-    Alert.alert('Error', 'No hay resultado intenta con otra ciudad  o país.'),[{Text:'Ok'}];
+  const mostrarAlerta = () => {
+    Alert.alert('Error', 'No hay resultado intenta con otra ciudad  o país.'), [{ Text: 'Ok' }];
   };
 
+
   return (
-    <View style={styles.app}>
-      <View style ={styles.contenido}>
-        <Formulario
-        busqueda = {busqueda}
-        guardarbusqueda = {guardarbusqueda}
-        guardarconsultar={guardarconsultar}
-        />
-<Pais resultado={resultado} />
+
+    <>
+
+
+
+      <View style={styles.app}>
+        <View style={styles.contenido}>
+          <Formulario
+            busqueda={busqueda}
+            guardarbusqueda={guardarbusqueda}
+            guardarconsultar={guardarconsultar}
+
+          />
+          <Pais resultado={resultado} />
+        </View>
       </View>
-    </View>
+
+    </>
   );
 }
 
@@ -59,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  app:{
+  app: {
     backgroundColor: '#b4f4d5',
   }
 });
