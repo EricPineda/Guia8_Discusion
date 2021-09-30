@@ -75,16 +75,19 @@ const Formulario = ({ busqueda, guardarbusqueda, guardarconsultar }) => {
         <>
             <View>
                 <View>
-                    <Text style={styles.input}>Pais</Text>
+                    <Text style={styles.input}>Búsqueda de país</Text>
+                    <Text style={styles.linea}></Text>
                 </View>
-                <View>
+                <View >
+                    <Text style={styles.sel}>Seleccione el país:</Text>
+                    <View style={styles.cont}>
                     <Picker
                         selectedValue={pais}
                         onValueChange={pais => guardarbusqueda({ ...busqueda, pais })}
                         //    onPress={}
                         style={styles.itempais}
                     >
-                        <Picker.Item label="--seleccione un pais--" value="" />
+                        <Picker.Item label="--Seleccione una opción--" value="" />
 
 
                         {
@@ -106,6 +109,7 @@ const Formulario = ({ busqueda, guardarbusqueda, guardarconsultar }) => {
                         }
 
                     </Picker>
+                    </View>
                 </View>
                 <TouchableWithoutFeedback
                     onPressIn={() => animacionEntrada()}
@@ -126,22 +130,27 @@ const Formulario = ({ busqueda, guardarbusqueda, guardarconsultar }) => {
 const styles = StyleSheet.create({
     input: {
         padding: 10,
-        height: 50,
         fontSize: 20,
-        marginBottom: 20,
+      
         textAlign: 'center',
-        color: '#000'
+        color: '#d1158c',
+        marginTop: 20
     },
     itempais: {
-        height: 60,
-        backgroundColor: '#fff',
+        height: 80,
+        backgroundColor: 'red',
+        borderWidth:3,
+        borderColor:'#000',
+        color:'#2273f5'
+
     },
     btnBuscar: {
+        margin:20,
         marginTop: 50,
-        height: 50,
-        backgroundColor: '#000',
+        height: 40,
+        backgroundColor: '#6640e3',
         fontSize: 20,
-        marginBottom: 20,
+        marginBottom: 50,
         textAlign: 'center'
     },
     textoBuscar: {
@@ -150,6 +159,21 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         textAlign: "center",
         fontSize: 18,
+    },
+    linea:{
+       /* borderTopWidth: 2,
+        borderTopColor: 'gray',
+        marginLeft:5,
+        marginRight: 5*/
+    },
+    sel:{
+        fontSize: 16,
+        marginTop:10
+    },
+    cont:{
+        borderWidth:1,
+        margin:5,
+        borderColor: '#c3c1c9'
     }
 })
 
