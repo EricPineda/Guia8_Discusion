@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
 import Formulario from './components/Formulario';
 import Pais from './components/Pais';
 
@@ -17,7 +17,7 @@ export default function App() {
     const { pais } = busqueda;
     const consultarPais = async () => {
       if (consultar) {
-        const url = `http://api.countrylayer.com/v2/alpha/${pais}?access_key=572b5176e27d29232a76dadd7a242736`;
+        const url = `https://servicodados.ibge.gov.br/api/v1/paises/${pais}`;
         try {
           const respuesta = await fetch(url);
           const resultado = await respuesta.json();
@@ -57,18 +57,18 @@ export default function App() {
             busqueda={busqueda}
             guardarbusqueda={guardarbusqueda}
             guardarconsultar={guardarconsultar}
-
+            
           />
-          <Pais resultado={resultado} />
+          <Pais resultado={resultado} cod={busqueda.pais} />
         </View>
       </View>
-
+      
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  /*container: {
     flex: 1,
     backgroundColor: '#b4f4d5',
     alignItems: 'center',
@@ -76,5 +76,17 @@ const styles = StyleSheet.create({
   },
   app: {
     backgroundColor: '#fff',
-  }
+  }*/
+
+  app: {
+    flex: 1,
+    backgroundColor: 'rgb(71,149,212)',
+    justifyContent: 'center',
+    },
+    contenido: {
+    margin: '2.5%',
+    },
+    
+
+
 });
